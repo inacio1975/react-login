@@ -1,0 +1,20 @@
+import axios from "axios";
+
+const api = axios.create({
+    baseURL: process.env.REACT_APP_API
+});
+
+export const useApi = () => ({
+    validateToken: async (token: string) =>{
+        const response = await api.post('/user/validate', {token});
+        return response.data;
+    },
+    sigin: async (email: string, password: string) =>{
+        const response = await api.post('/sigin', {email, password});
+        return response.data;
+    },
+    signout: async () =>{
+        const response = await api.post('/logout');
+        return response.data;
+    }
+});
